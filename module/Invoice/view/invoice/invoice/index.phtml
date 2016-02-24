@@ -1,0 +1,415 @@
+<!-- 
+Using DOMPDF this page creates a pdf template with html.
+It is not the prettiest example of html markup but PDFDOM
+works in mysterious ways. It reads HTMl and changes how you 
+would normally see it in the browser when it outputs the pdf. 
+
+I used Acrobat Pro to convert the PDF to HTML then added some 
+extra styles to get it very close to the template provided to me.
+-->
+
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        text-indent: 0;
+    }
+    h1 {
+        color: #8394C9;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 24pt;
+        padding-left: 212px !important;
+    }
+    h2 {
+        color: black;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 9.5pt;
+    }
+    .s1 {
+        color: #FFF;
+        font-family: "Times New Roman", serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 10pt;
+    }
+    .p,
+    p {
+        color: #FFF;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 10pt;
+        margin: 0pt;
+    }
+    .boxCont p {
+        color: #000;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 10pt;
+        margin: 0pt;
+        padding: 10px;
+    }
+    .s2 {
+        color: #FFF;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 8pt;
+    }
+    .s3 {
+        color: black;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 10pt;
+    }
+    .s4 {
+        color: black;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 9.5pt;
+        padding-left: 183px;
+    }
+    .s5 {
+        color: black;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 9.5pt;
+    }
+    .s6 {
+        color: black;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 12pt;
+    }
+    .s7 {
+        color: black;
+        font-family: "Trebuchet MS", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 12pt;
+        z-index: 10;
+        position: relative;
+    }
+    .pdfWrap {
+        width: 600px;
+        padding: 40px 0 0 50px;
+    }
+    table {
+        padding-left: 8px;
+    }
+    .order {
+        padding-left: 400px;
+    }
+    .topData {
+        padding-left: 500px;
+        top: 45px;
+        position: absolute;
+    }
+    .topMid {
+        padding-left: 500px;
+        top: 70px;
+        position: absolute;
+    }
+    .topBot {
+        padding-left: 500px;
+        top: 95px;
+        position: absolute;
+    }
+    .boxCont {
+        border: 2px solid #000;
+        width: 360px;
+        height: 150px;
+        margin-left: 5px;
+        overflow: hidden;
+        padding-bottom: 10px;
+    }
+    .boxHead {
+        border-bottom: 1px solid #000;
+        width: 360px;
+        height: 18px;
+        background: #C1CDCD;
+    }
+    .bord {
+        width: 170px;
+        border-bottom: 2px solid #000;
+        position: absolute;
+        top: 500px;
+        left: 492px;
+    }
+    .bordb {
+        width: 170px;
+        border-bottom: 2px solid #000;
+        position: absolute;
+        top: 503px;
+        left: 492px;
+    }
+    .total {
+        position: absolute;
+        top: 504px;
+        left: -10px;
+    }
+    .tent {
+        color: #000;
+        text-align: center;
+    }
+    .hideW {
+        color: #fff !important;
+        text-align: center;
+    }
+    .hideB {
+        color: #E4E8F3 !important;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+    <div class="pdfWrap">
+        <h1>DEVELOPMENT INVOICE</h1>
+
+
+        <div class="topData">
+            <table>
+                <tr style="height:14pt">
+                    <td style="width:75pt;" bgcolor="#E4E8F3">
+                        <p class="tent">
+                            <?php echo $_POST[ 'djc']; ?> </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="topMid">
+            <table>
+                <tr style="height:14pt">
+                    <td style="width:75pt;" bgcolor="#E4E8F3">
+                        <p class="s3" style="text-indent: 0pt;line-height: 10pt;text-align: center;">0</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="topBot">
+            <table>
+                <tr style="height:14pt">
+                    <td style="width:75pt;" bgcolor="#E4E8F3">
+                        <p class="s3" style="text-indent: 0pt;line-height: 10pt;text-align: center;">0</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+
+        <div class="order">
+            <h2 style="padding-top: 3pt;text-indent: 0pt;line-height: 120%;text-align: left;">DATE:</h2>
+            <h2 style="padding-top: 3pt;text-indent: 0pt;line-height: 120%;text-align: left;">INVOICE #</h2>
+            <h2 style="padding-top: 3pt;text-indent: 0pt;line-height: 120%;text-align: left;">Customer ID</h2>
+        </div>
+
+                            
+
+        <table style="border-collapse:collapse padding-bottom:10pt" cellspacing="0">
+            <tr style="height:14pt">
+                <td style="width:143pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-left-color:#C0C0C0;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt;border-right-color:#C0C0C0" bgcolor="#3B4E87">
+                    <p class="s2" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">BILL TO:</p>
+                </td>
+                </p>
+            </tr>
+              <tr>
+                <td>
+                    <p class="tent">
+                        <?php echo gmdate('m / d / y'); ?> </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tent">
+                        <?php echo $_POST[ 'customerName']; ?> </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tent">
+                        <?php echo $_POST[ 'address']; ?> </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="tent">
+                        <?php echo $_POST[ 'customerPhone']; ?> </p>
+                </td>
+            </tr>
+        </table>
+
+
+
+        <p style="text-indent: 0pt;text-align: left;">
+            <br/>
+        </p>
+
+
+
+        <p style="text-indent: 0pt;text-align: left;">
+            <br/>
+        </p>
+
+        <p style="text-indent: 0pt;text-align: left;">
+            <br/>
+        </p>
+
+        <p style="text-indent: 0pt;text-align: left;">
+            <br/>
+        </p>
+
+        <table style="border-collapse:collapse;margin-left:5.2pt" cellspacing="0">
+            <tr style="height:14pt">
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-left-color:#C0C0C0;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt;border-right-color:#C0C0C0" bgcolor="#3B4E87">
+                    <p class="s2" style="padding-left: 23pt;text-indent: 0pt;text-align: left;">DEVELOPER</p>
+                </td>
+                <td style="width:203pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-left-color:#C0C0C0;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt;border-right-color:#C0C0C0" bgcolor="#3B4E87">
+                    <p class="s2" style="padding-left: 18pt;text-indent: 0pt;text-align: center;">DESCRIPTION</p>
+                </td>
+                <td style="width:70pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-left-color:#C0C0C0;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt;border-right-color:#C0C0C0" bgcolor="#3B4E87">
+                    <p class="s2" style="padding-left: 7pt;text-indent: 0pt;text-align: left;">HOURLY PRICE</p>
+                </td>
+                <td style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-left-color:#C0C0C0;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt;border-right-color:#C0C0C0" bgcolor="#3B4E87">
+                    <p class="s2" style="text-indent: 0pt;text-align: center;">HOURS</p>
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-left-color:#C0C0C0;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt;border-right-color:#C0C0C0" bgcolor="#3B4E87">
+                    <p class="s2" style="padding-right: 2pt;text-indent: 0pt;text-align: center;">TOTAL</p>
+                </td>
+            </tr>
+            <tr style="height:14pt">
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="tent">
+                        <?php echo $_POST[ 'yourName']; ?>
+                    </p>
+                </td>
+                <td style="width:203pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="tent">
+                        <?php echo $_POST[ 'description']; ?>
+                    </p>
+                </td>
+                <td style="width:70pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="tent">
+                        <?php echo $_POST[ 'rate']; ?>
+                    </p>
+                </td>
+                <td style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="tent">
+                        <?php echo $_POST[ 'hours']; ?>
+                    </p>
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" bgcolor="#E4E8F3">
+                    <p class="tent">
+                        <?php echo $_POST[ 'total']; ?>
+                    </p>
+                </td>
+            </tr>
+            <tr style="height:14pt">
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:203pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:70pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="s3 hideW" style="text-indent: 0pt;line-height: 11pt;text-align: center;">500</p>
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" bgcolor="#E4E8F3">
+                    <p class="s3 hideB" style="text-indent: 0pt;line-height: 11pt;text-align: center;">0</p>
+                </td>
+            </tr>
+            <tr style="height:14pt">
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:203pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:70pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="s3 hideW" style="text-indent: 0pt;line-height: 11pt;text-align: center;">500</p>
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" bgcolor="#E4E8F3">
+                    <p class="s3 hideB" style="text-indent: 0pt;line-height: 11pt;text-align: center;">0</p>
+                </td>
+            </tr>
+            <tr style="height:14pt">
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:203pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:70pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt">
+                    <p class="s3 hideW" style="text-indent: 0pt;line-height: 11pt;text-align: center;">500</p>
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#C0C0C0;border-right-style:solid;border-right-width:1pt" bgcolor="#E4E8F3">
+                    <p class="s3 hideB" style="text-indent: 0pt;line-height: 11pt;text-align: center;">0</p>
+                </td>
+            </tr>
+            <tr style="height:14pt">
+                <td style="width:87pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:203pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:70pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" />
+                <td style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
+                    <p class="s3 hideW" style="text-indent: 0pt;text-align: center;">500</p>
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt;border-top-color:#C0C0C0;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt" bgcolor="#E4E8F3">
+                    <p class="s3 hideB" style="text-indent: 0pt;text-align: center;">0</p>
+                </td>
+            </tr>
+            <tr style="height:28pt">
+                <td style="width:425pt;border-top-style:solid;border-top-width:1pt" colspan="4">
+                    <p class="s4" style="padding-right: 17pt;text-indent: 0pt;text-align: right;">SUBTOTAL</p>
+                    <p class="s4" style="padding-right: 45pt;text-indent: 0pt;text-align: right;">TAX</p>
+
+                </td>
+                <td style="width:75pt;border-top-style:solid;border-top-width:1pt" bgcolor="#E4E8F3">
+                    <p class="s6 hideB" style="text-indent: 0pt;line-height: 13pt;text-align: center;">0</p>
+                    <p class="s6 hideB" style="text-indent: 0pt;line-height: 14pt;text-align: center;">500</p>
+                </td>
+            </tr>
+        </table>
+
+        <div class="boxCont">
+            <div class="boxHead">
+                <p class="s5" style="padding-top: 2pt;padding-left: 1pt;text-indent: 0pt;text-align: left;">Other Comments or Special Instructions</p>
+            </div>
+            <p>
+                <?php echo $_POST[ 'comments']; ?>
+            </p>
+        </div>
+
+        <div class="bord">
+        </div>
+        <div class="bordb">
+        </div>
+
+        <div class="total">
+            <table>
+                <tr style="height:28pt">
+                    <td style="width:425pt;" colspan="4">
+                        <p class="s4" style="padding-right: 17pt;text-indent: 0pt;text-align: right;">TOTAL</p>
+                    </td>
+                    <td style="width:75pt;" bgcolor="#E4E8F3">
+                        <p class="tent">
+                            <?php echo $_POST[ 'total']; ?>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
